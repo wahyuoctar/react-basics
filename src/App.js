@@ -9,10 +9,10 @@ import ContentCard from './components/ContentCard/ContentCard';
 function App() {
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
     <div className='container'>
       <div className='row'>
-        <div className='col-6 offset-3'>
+        <div className='col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3'>
     <ContentCard/>
         </div>
       </div>

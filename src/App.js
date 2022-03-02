@@ -28,6 +28,34 @@ const data = [
   }
 ]
 
+const listToDO = [
+  {
+    date: "2 Mar 2022",
+    action: "Belajar Programming",
+    status: "Done"
+  },
+  {
+    date: "4 Mar 2022",
+    action: "Belajar Mengaji",
+    status: "On Going"
+  },
+  {
+    date: "7 Mar 2022",
+    action: "Belajar Mengemudi",
+    status: "Done"
+  },
+  {
+    date: "10 Mar 2022",
+    action: "Main Basket",
+    status: "Done"
+  },
+  {
+    date: "15 Mar 2022",
+    action: "Ngaduk Semen",
+    status: "On Going"
+  }
+]
+
 function App() {
 
   const renderContentList = () => {
@@ -41,6 +69,18 @@ function App() {
         />)
     })
   }
+
+  const toDoItem = () =>{
+    return listToDO.map((val) =>{
+      return (
+        <ToDoItem
+        date = {val.date}
+        action = {val.action}
+        status = {val.status}
+        />
+      )
+    })
+  }
   return (
     <>
     {/* <Navbar/> */}
@@ -48,7 +88,7 @@ function App() {
       <div className='row'>
         <div className='col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3'>
           {/* {renderContentList()} */}
-        <ToDoItem/>
+        {toDoItem()}
         </div>
       </div>
     </div>

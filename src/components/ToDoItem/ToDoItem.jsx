@@ -13,10 +13,18 @@ return (
             <div className="d-flex justify-content-between">
                 <div>
             <CardTitle tag='h5' className='fw-bold'>
-                2 Mar 2022</CardTitle>
-            <CardText>Belajar Programming</CardText>
+                {props.date}</CardTitle>
+            <CardText>
+                {props.action}
+            </CardText>
             </div>
-            <Button color='success'>Done</Button>
+            {props.status == "Done" ? <Button color='success'>
+                {props.status}
+            </Button>: 
+            <Button color='danger'>
+            {props.status}
+            </Button>}
+            
             </div>
         </CardBody>
     </Card>

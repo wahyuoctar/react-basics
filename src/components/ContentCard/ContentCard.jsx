@@ -3,27 +3,27 @@ import { Card, CardBody, CardTitle, CardSubtitle, CardFooter, CardText, Button,
 import {FaRegThumbsUp} from 'react-icons/fa'
 import newyork from '../../assets/images/newyork.jpeg'
 
-const username = "seto"
-const location = "BSD"
-const numberOfLikes = 13523
-const caption = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae perspiciatis ad eligendi tempore perferendis deserunt ratione ullam nostrum suscipit vitae! Hic quae reprehenderit atque eveniet. Tenetur vitae totam inventore cumque fugiat sequi eum nisi commodi, natus quae tempora, consequuntur dolores expedita, officiis sed quibusdam perspiciatis dicta. Similique debitis quaerat earum?"
 
-const ContentCard = () => {
+const ContentCard = (props) => {
     const likePost = (amount) =>{
-        alert(`Liked Post ${amount}!`)
+        props.numberOfLikes += 1
+        alert(`Liked Post ${props.numberOfLikes}!`)
     }
     return (
         <Card>
         <CardBody>
-            <CardTitle tag="h5" className='fw-bold'>{username}</CardTitle>
-            <CardSubtitle tag="h6" className='text-muted mb-4'>{location}</CardSubtitle>
+            <CardTitle tag="h5" className='fw-bold'>
+                {props.username}</CardTitle>
+            <CardSubtitle tag="h6" className='text-muted mb-4'>
+                {props.location}</CardSubtitle>
 
             <img style={{width: "100%"}} className='rounded img-fluid' src={newyork} alt="user's content" />
         
-        <CardText tag="h6" className='fw-bold mt-3'>{numberOfLikes.toLocaleString()} Likes</CardText>
+        <CardText tag="h6" className='fw-bold mt-3'>
+            {props.numberOfLikes.toLocaleString()} Likes</CardText>
         <CardText>
-            <span className='fw-bold'>{username}</span>{" "}
-            {caption.length > 140 ? caption.slice(0, 140) + "..." : caption}
+            <span className='fw-bold'>{props.username}</span>{" "}
+            {props.caption.length > 140 ? props.caption.slice(0, 140) + "..." : props.caption}
         </CardText>
 
         <Button onClick={() => likePost(14)} color='danger' className='d-flex justify-content-center align-items-center'>

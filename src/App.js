@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import  './assets/styles.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from './components/Navbar/Navbar'
@@ -6,6 +7,7 @@ import TourSection from './components/TourSection/TourSection';
 import ClassComponent from './components/ClassComponent/ClassComponent';
 import ContentCard from './components/ContentCard/ContentCard';
 import ToDoItem from './components/ToDoItem/ToDoItem';
+import { Button } from 'reactstrap'
 
 const data = [
   {
@@ -57,6 +59,7 @@ const listToDO = [
 ]
 
 function App() {
+  const [myUsername, setMyUsername] = useState("seto")
 
   const renderContentList = () => {
     return data.map((val) =>{
@@ -81,6 +84,11 @@ function App() {
       )
     })
   }
+
+  const changeUsername = () => {
+    setMyUsername("Bill")
+  }
+
   return (
     <>
     {/* <Navbar/> */}
@@ -91,6 +99,10 @@ function App() {
         {toDoItem()}
         </div>
       </div>
+
+      <h1>{myUsername}</h1>
+      <Button onClick={changeUsername}>Change username</Button>
+
     </div>
     {/* <BandSection/>
     <TourSection/>

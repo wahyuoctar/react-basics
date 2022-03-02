@@ -18,8 +18,9 @@ return (
                 {props.action}
             </CardText>
             </div>
-            {props.status == "Done" ? <Button color='success'>
-                {props.status}
+            {props.status == "Done" ? 
+            <Button color='success'>
+            {props.status}
             </Button>: 
             <Button color='danger'>
             {props.status}

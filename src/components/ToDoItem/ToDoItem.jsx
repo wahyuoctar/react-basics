@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
 Card,
 CardBody,
@@ -7,6 +8,15 @@ Button
 } from 'reactstrap'
 
 const ToDoItem = (props) => {
+    const [status, setIsDone] = useState(props.status)
+
+    const switchButton = () => {
+        if(status == "Done"){
+            setIsDone("On Going")
+        } else{
+            setIsDone("Done")}
+    }
+
 return (
     <Card className='my-2'>
         <CardBody>
@@ -18,12 +28,12 @@ return (
                 {props.action}
             </CardText>
             </div>
-            {props.status == "Done" ? 
-            <Button color='success'>
-            {props.status}
+            {status == "Done" ? 
+            <Button onClick={switchButton} color='success'>
+            Done
             </Button>: 
-            <Button color='danger'>
-            {props.status}
+            <Button onClick={switchButton} color='danger'>
+            On Going
             </Button>}
             
             </div>

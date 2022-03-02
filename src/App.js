@@ -59,7 +59,6 @@ const listToDO = [
 ]
 
 function App() {
-  const [myUsername, setMyUsername] = useState("seto")
 
   const renderContentList = () => {
     return data.map((val) =>{
@@ -85,10 +84,6 @@ function App() {
     })
   }
 
-  const changeUsername = () => {
-    setMyUsername("Bill")
-  }
-
   return (
     <>
     {/* <Navbar/> */}
@@ -99,10 +94,6 @@ function App() {
         {toDoItem()}
         </div>
       </div>
-
-      <h1>{myUsername}</h1>
-      <Button onClick={changeUsername}>Change username</Button>
-
     </div>
     {/* <BandSection/>
     <TourSection/>

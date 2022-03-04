@@ -8,6 +8,7 @@ import ClassComponent from './components/ClassComponent/ClassComponent';
 import ContentCard from './components/ContentCard/ContentCard';
 import ToDoItem from './components/ToDoItem/ToDoItem';
 import { Button, Input } from 'reactstrap'
+import axios from 'axios'
 
 const data = [
   {
@@ -73,14 +74,14 @@ function App() {
   }
 
   const renderToDoItem = () =>{
-    return toDoItem.map((val, idx) =>{
+    return toDoItem.map((val) =>{
       return (
         <ToDoItem
         date = {val.date}
         action = {val.action}
         isDone = {val.isDone}
-        deleteData={()=> deleteItem(idx)}
-        editProgress={()=> editStatus(idx)}
+        deleteData={()=> deleteItem(val.id)}
+        editProgress={()=> editStatus(val.id)}
         />
       )
     })
@@ -91,31 +92,9 @@ function App() {
   const [todoInputDateValue, setTodoInputDate] = useState("")
 
   const [toDoItem, setToNewList] = useState(
-    [{
-      date: new Date(),
-      action: "Belajar Programming",
-      isDone: true
-    },
-    {
-      date: new Date(),
-      action: "Belajar Mengaji",
-      isDone: false
-    },
-    {
-      date: new Date(),
-      action: "Belajar Mengemudi",
-      isDone: true
-    },
-    {
-      date: new Date(),
-      action: "Main Basket",
-      isDone: true
-    },
-    {
-      date: new Date(),
-      action: "Ngaduk Semen",
-      isDone: false
-    }]
+    [
+
+    ]
   )
 
   const inputHandler = (event) => {
@@ -129,26 +108,60 @@ function App() {
   }
 
   const addTodoItem = () => {
-    let newTodoArray = [...toDoItem]
-    newTodoArray.push({
+    // let newTodoArray = [...toDoItem]
+    // newTodoArray.push({
+    //   date: todoInputDateValue,
+    //   action: todoInputValue,
+    //   isDone: "On Going"
+    // })
+
+    // setToNewList(newTodoArray)
+
+    const newData = {
       date: todoInputDateValue,
       action: todoInputValue,
-      isDone: "On Going"
+      isDone: false
+    }
+
+    axios.post("http://localhost:2000/todos", newData).then(() =>{
+      fetchTodoList()
+    })
+  }
+
+  const deleteItem = (id) => {
+    // const newArray = [...toDoItem]
+    // newArray.splice(index, 1)
+    // setToNewList(newArray)
+
+    axios.delete(`http://localhost:2000/todos/${id}`).then(() => {
+      fetchTodoList()
+    })
+  }
+
+  const editStatus = (id) => {
+    // const newArray = [...toDoItem]
+    // newArray[index].isDone = !newArray[index].isDone
+    // setToNewList(newArray)
+    
+    const dataToFind = toDoItem.find((val) =>{
+      return val.id === id
     })
 
-    setToNewList(newTodoArray)
+    // axios.get(`http://localhost:2000/todos/${id}`).then((res) =>{
+    //   const newIsDoneValue = !res.data.isDone
+      
+      axios.patch(`http://localhost:2000/todos/${id}`, { isDone: !dataToFind.isDone}).then(() =>{
+        fetchTodoList()
+      })
+    // }
+
   }
 
-  const deleteItem = (index) => {
-    const newArray = [...toDoItem]
-    newArray.splice(index, 1)
-    setToNewList(newArray)
-  }
+  const fetchTodoList = () => {
+    axios.get("http://localhost:2000/todos").then((res) => {
+      setToNewList(res.data)
+    })
 
-  const editStatus = (index) => {
-    const newArray = [...toDoItem]
-    newArray[index].isDone = !newArray[index].isDone
-    setToNewList(newArray)
   }
 
   return (
@@ -162,6 +175,7 @@ function App() {
         </div>
         <div className='col-2'>
           <Button onClick={addTodoItem} color='success'>Add Todo</Button>
+          <Button onClick={fetchTodoList} color='info'>Fetch Todo</Button>
         </div>
       </div>
       <div className='row'>

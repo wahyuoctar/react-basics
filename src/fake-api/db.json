@@ -1,0 +1,28 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "date": "03-04-2022",
+      "action": "Belajar Programming",
+      "isDone": true
+    },
+    {
+      "date": "2022-03-04",
+      "action": "Main Basket",
+      "isDone": true,
+      "id": 2
+    },
+    {
+      "date": "2022-03-04",
+      "action": "Sholat Jumat",
+      "isDone": true,
+      "id": 3
+    },
+    {
+      "date": "2022-03-23",
+      "action": "Ke Pasar",
+      "isDone": true,
+      "id": 4
+    }
+  ]
+}
